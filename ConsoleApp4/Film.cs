@@ -8,6 +8,6 @@ namespace ConsoleApp4
 {
     class Film
     {
-        public string nazwa { get; set; }
+        public string Name { get; set; }
     }
 }
