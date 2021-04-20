@@ -12,30 +12,20 @@ namespace ConsoleApp4
     class Program
     {
 
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             string path = Path.Combine(Environment.CurrentDirectory, @"baza\","netflix.txt");
             List<Film> Film_z_netflix_test = new List<Film>();
-            GetHtmlAsync(Film_z_netflix_test);
-            Save(Film_z_netflix_test, path);
-            Console.ReadLine();
+            await GetHtmlAsync(Film_z_netflix_test);
+            Functions.getSave getsave = null;
+            Functions functions = new Functions();
+            getsave = new Functions.getSave(functions.MySave);
+            getsave(Film_z_netflix_test, path);
+           // Console.ReadLine();
         }
 
-           private static void Save(List<Film> Tytuly1,string sciezka)
-        {
-            using (StreamWriter sciezkadoksiazki = new StreamWriter(sciezka, false))
-            {
-                string listai = "";
-                for (int i = 0; i < Tytuly1.Count; i++)
-                {
-                    listai += Tytuly1[i].Name + "\r\n";
-                }
-                sciezkadoksiazki.Write(listai);
 
-            }
-        }
-
-        private static async void GetHtmlAsync(List<Film> Title)
+        private static async Task<List<Film>> GetHtmlAsync(List<Film> Title)
         {
             /*
             var url = "https://www.filmweb.pl/user/Piotrsowa96/films"; //podmien na link swojego konta
@@ -83,11 +73,11 @@ namespace ConsoleApp4
 
             string s_counter = html_file.DocumentNode.Descendants("li")
            .Where(node => node.GetAttributeValue("class", "")
-           .Equals("last")).FirstOrDefault().InnerHtml.ToString().Substring(40,3);
+           .Equals("last")).FirstOrDefault().InnerHtml.ToString().Substring(27,3);
 
             //temp problem solved: divide elements(films) count by numbers element on page
             int counter = Int32.Parse(s_counter) + 1;
-            Title = new List<Film>();
+            //Title = new List<Film>();
 
             //itteration page from 1 to the last one
             for (int i = 1; i < 3; i++)//zmien 3 na licznik
@@ -110,17 +100,17 @@ namespace ConsoleApp4
                 for (int j = 0; j < data.Count; j++)
                 {
                     a[j] = data[j].InnerText;
-                    a[j] = a[j].Substring(0, a[j].Length - 9);
+                    a[j] = a[j].Substring(0, a[j].Length - 8);
                     Console.WriteLine(a[j]);
                    Title.Add(new Film() { Name = a[j]});
                         
                     }
 
             }
-           // Save(Tytuly, path);
+            // Save(Tytuly, path);
 
-           // Console.ReadLine();
-
+            // Console.ReadLine();
+            return Title;
         }
     }
 }
