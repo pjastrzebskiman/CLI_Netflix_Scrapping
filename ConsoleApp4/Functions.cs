@@ -41,15 +41,23 @@ namespace ConsoleApp4
             var html_file = new HtmlDocument();
             html_file.LoadHtml(html);
 
-
-            string s_counter = html_file.DocumentNode.Descendants("li")
-           .Where(node => node.GetAttributeValue("class", "")
-           .Equals("last")).FirstOrDefault().InnerHtml.ToString().Substring(27, 3); // Substring(40,3);
+            try
+            {
+                string s_counter = html_file.DocumentNode.Descendants("li")
+               .Where(node => node.GetAttributeValue("class", "")
+               .Equals("last")).FirstOrDefault().InnerHtml.ToString().Substring(40, 3); // Substring(40,3); 27,3
+                int counter = Int32.Parse(s_counter) + 1;
+            }
+           
 
             //temp problem solved: divide elements(films) count by numbers element on page
-            int counter = Int32.Parse(s_counter) + 1;
-            //Title = new List<Film>();
 
+            //Title = new List<Film>();
+             catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Console.ReadLine();
+            }
             //itteration page from 1 to the last one
             for (int i = 1; i < 3; i++)//zmien 3 na licznik
             {

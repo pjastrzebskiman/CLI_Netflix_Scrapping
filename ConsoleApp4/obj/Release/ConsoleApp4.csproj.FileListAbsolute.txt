@@ -1,0 +1,1 @@
+C:\Users\Piotr\Documents\GitHub\CLI_Netflix_Scrapping\ConsoleApp4\obj\Release\ConsoleApp4.csproj.CoreCompileInputs.cache
